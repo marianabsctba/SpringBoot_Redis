@@ -37,4 +37,3 @@ public class CourseCacheService {
         redisTemplate.delete(key);
     }
 }
-

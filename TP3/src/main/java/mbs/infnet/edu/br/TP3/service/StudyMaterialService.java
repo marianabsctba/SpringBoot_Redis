@@ -13,19 +13,27 @@ public class StudyMaterialService {
     @Autowired
     private StudyMaterialRepository studyMaterialRepository;
 
-    public List<StudyMaterial> getAllStudyMaterials() {
+    public List<StudyMaterial> getAllMaterials() {
         return studyMaterialRepository.findAll();
     }
 
-    public StudyMaterial saveStudyMaterial(StudyMaterial studyMaterial) {
+    public StudyMaterial getMaterialById(Long id) {
+        return studyMaterialRepository.findById(id).orElse(null);
+    }
+
+    public StudyMaterial saveMaterial(StudyMaterial studyMaterial) {
         return studyMaterialRepository.save(studyMaterial);
     }
 
-    public StudyMaterial getStudyMaterialById(String materialId) {
-        return studyMaterialRepository.findById(materialId).orElse(null);
+    public StudyMaterial updateMaterial(Long id, StudyMaterial updatedMaterial) {
+        if (studyMaterialRepository.existsById(id)) {
+            updatedMaterial.setId(id);
+            return studyMaterialRepository.save(updatedMaterial);
+        }
+        return null;
     }
 
-    public void deleteStudyMaterialById(String materialId) {
-        studyMaterialRepository.deleteById(materialId);
+    public void deleteMaterial(Long id) {
+        studyMaterialRepository.deleteById(id);
     }
 }

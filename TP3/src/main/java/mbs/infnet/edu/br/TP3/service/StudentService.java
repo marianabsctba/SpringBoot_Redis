@@ -30,4 +30,3 @@ public class StudentService {
         studentRepository.deleteById(studentId);
     }
 }
-
