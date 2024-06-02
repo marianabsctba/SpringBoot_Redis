@@ -28,7 +28,11 @@ public class StudentController {
 
     @GetMapping("/{studentId}")
     public Student getStudentById(@PathVariable Long studentId) {
-        return studentService.getStudentById(studentId);
+        Student student = studentService.getStudentById(studentId);
+        if (student == null) {
+            throw new ResourceNotFoundException("Student not found with id " + studentId);
+        }
+        return student;
     }
 
     @PutMapping("/{studentId}")

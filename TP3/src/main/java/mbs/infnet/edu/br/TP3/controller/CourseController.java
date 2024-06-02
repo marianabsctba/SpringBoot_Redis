@@ -27,7 +27,11 @@ public class CourseController {
 
     @GetMapping("/{courseId}")
     public Course getCourseById(@PathVariable Long courseId) {
-        return courseService.getCourseById(courseId);
+        Course course = courseService.getCourseById(courseId);
+        if (course == null) {
+            throw new ResourceNotFoundException("Course not found with id " + courseId);
+        }
+        return course;
     }
 
     @PutMapping("/{courseId}")
